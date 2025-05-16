@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pillow
+pytesseract
+sentence-transformers
+openai
+requests
+python-multipart
