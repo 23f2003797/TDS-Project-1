@@ -1,1 +1,3 @@
-# TDS-Project-1
+# TDS Virtual TA
+
+An automated Teaching Assistant for the IITM TDS course.
