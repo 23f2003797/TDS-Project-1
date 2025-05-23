@@ -1,25 +1,21 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from app.qa_engine import answer_question
 import base64
-import io
-from PIL import Image
-import pytesseract
+from app.answer_engine import generate_answer
+from app.discourse_scraper import extract_text_from_image
 
 app = FastAPI()
 
-class QuestionInput(BaseModel):
+class Query(BaseModel):
     question: str
-    image: str | None = None
+    image: str = None
 
 @app.post("/api/")
-async def get_answer(input_data: QuestionInput):
-    extracted_text = ""
-    if input_data.image:
-        image_data = base64.b64decode(input_data.image)
-        image = Image.open(io.BytesIO(image_data))
-        extracted_text = pytesseract.image_to_string(image)
+async def answer_query(query: Query):
+    if query.image:
+        image_data = base64.b64decode(query.image)
+        extracted_text = extract_text_from_image(image_data)
+        query.question += f" {extracted_text}"
     
-    final_question = input_data.question + "\n" + extracted_text
-    answer, links = answer_question(final_question)
+    answer, links = generate_answer(query.question)
     return {"answer": answer, "links": links}
