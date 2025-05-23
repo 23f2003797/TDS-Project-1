@@ -1,12 +1,12 @@
 import requests
 import os
 
-AI_PIPE_API_KEY = os.getenv("AI_PIPE_API_KEY")
+AI_PIPE_API_KEY = os.getenv("eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjIwMDM3OTdAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.ooPeiUm12TyB4g4y9f38z51oKLvYtqRBLKCCHk6f5Gc")
 AI_PIPE_URL = "https://api.aipipe.ai/v1/chat/completions"
 
 def generate_answer(question: str):
     headers = {
-        "Authorization": f"Bearer {eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjIwMDM3OTdAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.ooPeiUm12TyB4g4y9f38z51oKLvYtqRBLKCCHk6f5Gc}",
+        "Authorization": f"Bearer {AI_PIPE_API_KEY}",
         "Content-Type": "application/json"
     }
 
